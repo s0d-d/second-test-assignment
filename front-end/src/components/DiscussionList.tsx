@@ -3,9 +3,11 @@ import axios from "axios";
 import { IDiscussion } from "../types";
 import Discussion from "./Discussion";
 import Post from "./Post";
+import { useAuth } from "../AuthProvider";
 
 const DiscussionList: React.FC = () => {
   const [discussions, setDiscussions] = useState<IDiscussion[]>([]);
+  const { user, authStatus } = useAuth();
 
   const fetchDiscussions = async () => {
     try {
@@ -24,9 +26,18 @@ const DiscussionList: React.FC = () => {
   return (
     <div>
       <div className="card">
-        <p className="text-center">What number is on your mind?</p>
-        <Post parentId={null} onResponse={fetchDiscussions} />
+        {user ? (
+          <>
+            <p className="text-center">What number is on your mind?</p>
+            <Post parentId={null} onResponse={fetchDiscussions} />
+          </>
+        ) : (
+          <p className="text-center">
+            Please log in or sign up to join the discussion
+          </p>
+        )}
       </div>
+
       <h4>Discussions</h4>
       {discussions.map((discussion) => (
         <Discussion

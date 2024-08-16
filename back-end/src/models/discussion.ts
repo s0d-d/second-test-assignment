@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema, ObjectId } from "mongoose";
 
 export interface IDiscussion extends Document {
-  _id: string | ObjectId;
+  _id: ObjectId;
   userId: string | null;
   number: number;
   operation: string | null;

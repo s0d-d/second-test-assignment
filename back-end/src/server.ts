@@ -2,7 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import discussionRoutes from "./routes/discussion";
+import notFound from "./routes/not-found";
+import loginRoutes from "./routes/login";
+import logoutRoutes from "./routes/logout";
+import signupRoutes from "./routes/signup";
+import userRoutes from "./routes/user";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -14,10 +20,27 @@ if (!dbUri) {
   throw new Error("DB_URI is not defined in the environment variables");
 }
 
-app.use(cors());
+app.use(cookieParser(process.env.JWT_SECRET));
+app.use(
+  cors({
+    // origin: function (origin, callback) {
+    //   console.log(origin);
+    //   return callback(null, true);
+    // },
+    origin: true,
+    // allowedHeaders: ["token", "Content-Type"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 app.use("/api/discussions", discussionRoutes);
+app.use("/api/login", loginRoutes);
+app.use("/api/logout", logoutRoutes);
+app.use("/api/signup", signupRoutes);
+app.use("/api/user", userRoutes);
+
+app.get("*", notFound);
 
 mongoose
   .connect(dbUri as string)

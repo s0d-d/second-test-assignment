@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Post.css";
+import { useAuth } from "../AuthProvider";
 
 interface PostProps {
   parentId: string | null;
@@ -10,18 +11,24 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({ parentId, onResponse }) => {
   const [operation, setOperation] = useState(parentId ? "+" : undefined);
   const [number, setNumber] = useState(1);
+  const { user } = useAuth();
 
   const onClick = async () => {
+    if (!user) {
+      throw new Error("User not found");
+    }
     if (parentId) {
       await axios.post(`/api/discussions/${parentId}`, {
         operation,
         number,
+        userId: user.id,
       });
     } else {
       await axios.post(`/api/discussions/`, {
         operation,
         number,
         parentId,
+        userId: user.id,
       });
     }
     onResponse();

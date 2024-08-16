@@ -1,21 +1,18 @@
 import { Router, Request, Response } from "express";
 import { Discussion, IDiscussion } from "../models/discussion";
-
+import { authMiddleware } from "../middleware/auth";
 const router = Router();
 
-// Start a new discussion
-router.post("/", async (req, res) => {
+router.post("/", authMiddleware, async (req, res) => {
   const { number, userId } = req.body;
   const discussion = new Discussion({ number, userId, result: number });
   await discussion.save();
   res.status(201).json(discussion);
-  console.log("saved successfully");
 });
 
-// Respond to a discussion with an operation
 router.post("/:id", async (req, res) => {
   const { id } = req.params;
-  const { operation, number } = req.body;
+  const { operation, number, userId } = req.body;
 
   const parentDiscussion = await Discussion.findById(id);
   if (!parentDiscussion)
@@ -44,6 +41,7 @@ router.post("/:id", async (req, res) => {
     number: number,
     operation,
     result,
+    userId: userId,
     parentId: id,
   });
   await discussion.save();
@@ -65,14 +63,12 @@ router.get("/", async (req: Request, res: Response) => {
       },
     ]).exec()) as IDiscussion[];
 
-    // Create a map to organize discussions by their IDs
     const discussionMap: { [key: string]: IDiscussion } = {};
     discussions.forEach((discussion) => {
       discussion.children = [];
       discussionMap[discussion._id.toString()] = discussion;
     });
 
-    // Organize discussions into a tree
     const rootDiscussions: IDiscussion[] = [];
     discussions.forEach((discussion) => {
       if (discussion.parentId) {
