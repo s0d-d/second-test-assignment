@@ -1,13 +1,10 @@
 # back-end/Dockerfile
 
 # Use an official Node.js runtime as a parent image
-FROM node:18
+FROM node:20
 
 # Set the working directory in the container
 WORKDIR /app
-
-# Install yarn
-RUN npm install -g yarn
 
 # Copy package.json and yarn.lock
 COPY package.json yarn.lock ./

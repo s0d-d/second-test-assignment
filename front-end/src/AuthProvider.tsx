@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import axios from "axios";
 import { IUser, IAuthStatus } from "./types";
+import API_ENDPOINTS from "./config/apiUrls";
 
 interface AuthContextType {
   user: IUser | null;
@@ -28,7 +29,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   useEffect(() => {
     const checkUserLoggedIn = async () => {
       try {
-        const response = await axios.get<IUser>("/api/user", {
+        const response = await axios.get<IUser>(API_ENDPOINTS.USER_INFO, {
           withCredentials: true,
         });
 

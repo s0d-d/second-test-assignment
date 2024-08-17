@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "./Modal";
 import axios from "axios";
 import "./LoginModal.css";
+import API_ENDPOINTS from "../config/apiUrls";
 
 interface LoginModalProps {
   isVisible: Boolean;
@@ -15,7 +16,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isVisible, onClose }) => {
 
   async function handleLogin(): Promise<void> {
     console.log(username, password);
-    await axios.post(`/api/login/`, {
+    await axios.post(API_ENDPOINTS.LOGIN, {
       username,
       password,
     });
@@ -24,7 +25,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isVisible, onClose }) => {
   }
 
   async function handleSignUp(): Promise<void> {
-    await axios.post(`/api/signup`, {
+    await axios.post(API_ENDPOINTS.SIGNUP, {
       username,
       password,
     });

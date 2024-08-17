@@ -4,14 +4,17 @@ import { IDiscussion } from "../types";
 import Discussion from "./Discussion";
 import Post from "./Post";
 import { useAuth } from "../AuthProvider";
+import API_ENDPOINTS from "../config/apiUrls";
 
 const DiscussionList: React.FC = () => {
   const [discussions, setDiscussions] = useState<IDiscussion[]>([]);
-  const { user, authStatus } = useAuth();
+  const { user } = useAuth();
 
   const fetchDiscussions = async () => {
     try {
-      const response = await axios.get<IDiscussion[]>("/api/discussions");
+      const response = await axios.get<IDiscussion[]>(
+        API_ENDPOINTS.DISCUSSIONS
+      );
       console.log(response.data);
       setDiscussions(response.data);
     } catch (error) {

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./Post.css";
 import { useAuth } from "../AuthProvider";
+import API_ENDPOINTS from "../config/apiUrls";
 
 interface PostProps {
   parentId: string | null;
@@ -18,13 +19,13 @@ const Post: React.FC<PostProps> = ({ parentId, onResponse }) => {
       throw new Error("User not found");
     }
     if (parentId) {
-      await axios.post(`/api/discussions/${parentId}`, {
+      await axios.post(`${API_ENDPOINTS.DISCUSSIONS}/${parentId}`, {
         operation,
         number,
         userId: user.id,
       });
     } else {
-      await axios.post(`/api/discussions/`, {
+      await axios.post(API_ENDPOINTS.DISCUSSIONS, {
         operation,
         number,
         parentId,

@@ -14,7 +14,8 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const dbUri = process.env.DB_URI;
+const dbUri =
+  process.env.DB_URI || "mongodb://localhost:27017/second-test-assignment";
 
 if (!dbUri) {
   throw new Error("DB_URI is not defined in the environment variables");
@@ -23,12 +24,7 @@ if (!dbUri) {
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(
   cors({
-    // origin: function (origin, callback) {
-    //   console.log(origin);
-    //   return callback(null, true);
-    // },
     origin: true,
-    // allowedHeaders: ["token", "Content-Type"],
     credentials: true,
   })
 );

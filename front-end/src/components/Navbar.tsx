@@ -7,7 +7,7 @@ import useLogout from "../hooks/useLogout";
 const Navbar: React.FC = () => {
   const [isModalVisible, showModal] = useState<Boolean>(false);
 
-  const { user, authStatus } = useAuth();
+  const { user } = useAuth();
   const logout = useLogout();
 
   return (
