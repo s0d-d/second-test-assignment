@@ -68,7 +68,7 @@ In a separate terminal window:
 cd back-end
 
 # The backend of this application requires a .env file for environment variables. So, create a .env file
-sudo touch .env
+touch .env
 ```
 
 Here's an example configuration:
