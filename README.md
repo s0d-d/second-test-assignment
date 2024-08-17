@@ -66,11 +66,25 @@ In a separate terminal window:
 
 ```bash
 cd back-end
+
+# The backend of this application requires a .env file for environment variables. So, create a .env file
+sudo touch .env
+```
+
+Here's an example configuration:
+```yaml
+PORT=5000
+DB_URI=mongodb://localhost:27017/second-test-assignment
+JWT_SECRET=some_secret_key
+```
+
+Now, you can install and run
+```bash
 yarn install
 yarn dev
 ```
 
-This will start the backend server, typically on http://localhost:5000.
+This will start the backend server on http://localhost:5000.
 
 ## Project Structure
 
