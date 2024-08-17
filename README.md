@@ -59,7 +59,7 @@ yarn install
 yarn dev
 ```
 
-This will start the frontend development server on http://localhost:3000.
+This will start the frontend development server on http://localhost:5173.
 
 Running the Backend
 In a separate terminal window:
@@ -70,7 +70,7 @@ yarn install
 yarn dev
 ```
 
-This will start the backend server, typically on http://localhost:3001.
+This will start the backend server, typically on http://localhost:5000.
 
 ## Project Structure
 
