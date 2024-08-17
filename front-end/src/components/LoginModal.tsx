@@ -30,6 +30,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isVisible, onClose }) => {
       password,
     });
 
+    setIsLogin(true);
     onClose();
   }
 
@@ -59,7 +60,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isVisible, onClose }) => {
           type="password"
           onChange={onPasswordChange}
         />
-        <button onClick={toggleMode}>
+        <button onClick={toggleMode} className="link-button">
           {isLogin
             ? "Don't have an account? Sign Up"
             : "Already have an account? Log In"}

@@ -54,7 +54,10 @@ const Post: React.FC<PostProps> = ({ parentId, onResponse }) => {
         onChange={(e) => setNumber(Number(e.target.value))}
       />
 
-      <button onClick={onClick} className={parentId ? "" : "secondary-button"}>
+      <button
+        onClick={onClick}
+        className={parentId ? "link-button" : "secondary-button"}
+      >
         {parentId ? "Reply" : "Post"}
       </button>
     </div>
