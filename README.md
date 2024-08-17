@@ -86,7 +86,7 @@ $ tree -L 1
 ## Usage
 
 - Viewing the Calculation Tree:
-- Open the application in your browser at http://localhost:3000.
+- Open the application in your browser at https://ellty.senseoutdoors.store.
 - You can view the calculation tree as an unregistered user.
 - Starting a New Calculation:
 - Register and log in to start a new calculation.
